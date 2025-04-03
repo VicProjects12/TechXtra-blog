@@ -1,17 +1,22 @@
-import React, { useEffect } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import Blogcard from '../components/Blogcard';
 import { getBlogs } from '../api/api';
 
 
+
 const Home = () => {
 
-  const [blogs, setBlogs] = useState(null);
 
+  const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
-    const allBlogs = getBlogs();
-    setBlogs(allBlogs.data);
-  }, []);
+    async function fetchData() {
+      const allBlogs = await getBlogs();
+      setBlogs(allBlogs.data);
+    }
+    fetchData();
+
+  }, [])
 
   const data = [
     {
@@ -62,17 +67,25 @@ const Home = () => {
       date: '2023-01-01',
       Comments: 10
     },
-]
+  ]
   return (
     <div>
       <p>{JSON.stringify(blogs)}</p>
-       <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
-        {data.map(x => {
-          return <Blogcard blogdata={x} />
+      <div>
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
+          {blogs && blogs.map((x, i) => {
+            return <Blogcard key={i} blogdata={x} />
+          })}
+
+        </div>
+        {/* <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
+        {blogs && blogs.map(x => {
+          return <Blogcard key={x.id || x._id} blogdata={x} />
         })}
-       </div>
-    </div>
-  )
+      </div> */}
+
+      </div>
+    </div>);
 }
 
-export default Home
+      export default Home

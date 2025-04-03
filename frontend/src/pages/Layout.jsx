@@ -5,26 +5,31 @@ const Layout = () => {
 
 
     const menu = [
-        {text:'Nature', path:'/'},
-        {text:'Travel', path:'/'},
-        {text:'Culture', path:'/'},
-        {text:'Food', path:'/'},
-        {text:'Fashion', path:'/'}
+        {text:'Home', path:'/'},
+        {text:'About', path:'/'},
+        {text:'Blog', path:'/'},
+        {text:'Services', path:'/'},
+        {text:'Contact', path:'/'}
     ]
   return (
     <div>
         {/* <Header></Header> */}
         <div className="border-b">
-            <div className="container px-5 py-5 flex justify-between">
+            <div className="px-5 py-5 flex justify-between">
                 <Link to='/'>
                 <span className='font-extrabold text-2xl'>TechXtra</span>
                 </Link>
                 <div className="flex">
                     <ul className='flex'>
                         {
-                            menu.map(x => {
-                                return <li><Link className='p-2 items-start justify-center flex'><span>{x.text}</span></Link></li>
-                            })
+                            
+                                menu.map((x, index) => {
+                                    return <li key={index}><Link className='p-2 items-start justify-center flex' to={x.path}><span>{x.text}</span></Link></li>
+                                })
+                            
+                            // menu.map((x) => {
+                            //     return <li><Link className='p-2 items-start justify-center flex'><span>{x.text}</span></Link></li>
+                            // })
                         }
                     </ul>
                     <button className='bg-slate-500 text-white px-2 py-1 rounded'>

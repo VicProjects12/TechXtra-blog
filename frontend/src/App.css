@@ -1,3 +1,7 @@
 body{
-  background-color: aliceblue;
+  background-color: rgb(205, 224, 233);
+}
+
+.ql-editor{
+  min-height: 230px;
 }
